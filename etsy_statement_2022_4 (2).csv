@@ -1,0 +1,140 @@
+﻿Date,Type,Title,Info,Currency,Amount,"Fees & Taxes",Net
+"April 15, 2022",VAT,"VAT: renew sold","renew sold: 1081700353",EUR,--,-€0.04,-€0.04
+"April 15, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1081700353",EUR,--,-€0.18,-€0.18
+"April 15, 2022",VAT,"VAT: transaction","transaction: 2973213753",EUR,--,-€5.57,-€5.57
+"April 15, 2022",VAT,"VAT: shipping transaction",,EUR,--,-€0.37,-€0.37
+"April 15, 2022",VAT,"VAT: Processing Fee","order: 2442920924",EUR,--,-€3.63,-€3.63
+"April 15, 2022",Fee,"Processing fee","Order #2442920924",EUR,--,-€17.27,-€17.27
+"April 15, 2022",Sale,"Payment for Order #2442920924","Funds will be available on Apr 16, 2022",EUR,€424.18,--,€424.18
+"April 15, 2022",Fee,"Transaction fee: Shipping","Order #2442920924",EUR,--,-€1.74,-€1.74
+"April 15, 2022",Fee,"Transaction fee: Simple Wedding Dress, Short Sleeve Weddi...","Order #2442920924",EUR,--,-€26.53,-€26.53
+"April 14, 2022",VAT,"VAT: renew sold","renew sold: 1069859018",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1069859018",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: shipping transaction",,EUR,--,-€0.37,-€0.37
+"April 14, 2022",VAT,"VAT: transaction","transaction: 2972568361",EUR,--,-€5.99,-€5.99
+"April 14, 2022",VAT,"VAT: Processing Fee","order: 2443692409",EUR,--,-€3.88,-€3.88
+"April 14, 2022",Fee,"Transaction fee: Shipping","Order #2443692409",EUR,--,-€1.74,-€1.74
+"April 14, 2022",Sale,"Payment for Order #2443692409",,EUR,€454.12,--,€454.12
+"April 14, 2022",Fee,"Transaction fee: Long Sleeve Wedding Dress, A Line Weddin...","Order #2443692409",EUR,--,-€28.53,-€28.53
+"April 14, 2022",Fee,"Processing fee","Order #2443692409",EUR,--,-€18.46,-€18.46
+"April 14, 2022",VAT,"VAT: listing","listing: 1201519282",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201519282",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: listing","listing: 1201514276",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201514276",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: listing","listing: 1201511372",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201511372",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: listing","listing: 1215460749",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215460749",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: listing","listing: 1215455493",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215455493",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: listing","listing: 1201501666",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201501666",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1215449323",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215449323",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1215420299",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215420299",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1201429624",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201429624",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1215377237",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215377237",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1201421514",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201421514",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1201417122",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201417122",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1215364873",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1215364873",EUR,--,-€0.19,-€0.19
+"April 14, 2022",VAT,"VAT: listing","listing: 1201398490",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1201398490",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: renew expired","renew expired: 864653464",EUR,--,-€0.04,-€0.04
+"April 14, 2022",Fee,"Listing fee ($0.20 USD)","Listing #864653464",EUR,--,-€0.18,-€0.18
+"April 14, 2022",VAT,"VAT: transaction","transaction: 2972159781",EUR,--,-€5.76,-€5.76
+"April 14, 2022",VAT,"VAT: Processing Fee","order: 2442208500",EUR,--,-€3.79,-€3.79
+"April 14, 2022",Fee,"Transaction fee: Mermaid Wedding Dress, Long Sleeve Weddi...","Order #2442208500",EUR,--,-€27.41,-€27.41
+"April 14, 2022",Tax,"Sales tax paid by buyer","Order #2442208500",EUR,--,-€32.07,-€32.07
+"April 14, 2022",Fee,"Processing fee","Order #2442208500",EUR,--,-€18.03,-€18.03
+"April 14, 2022",Sale,"Payment for Order #2442208500",,EUR,€443.18,--,€443.18
+"April 13, 2022",Deposit,"€30.87 sent to your bank account",,EUR,--,--,--
+"April 13, 2022",Fee,"Credit for transaction fee on Minimalist A-Line Strapless Wedding Dres...","Order #2358294329",EUR,--,€22.10,€22.10
+"April 13, 2022",VAT,"VAT: transaction credit","transaction credit: 2853926182",EUR,--,€4.64,€4.64
+"April 13, 2022",Payment,"Charge for refund 2358294329",,EUR,€412.37,--,€412.37
+"April 13, 2022",Fee,"Credit for listing fee ($0.20 USD)","Listing #1080535309",EUR,--,€0.18,€0.18
+"April 13, 2022",VAT,"VAT: auto-renew expired credit","auto-renew expired credit: 1080535309",EUR,--,€0.04,€0.04
+"April 13, 2022",Fee,"Credit for processing fee","Order #2358294329",EUR,--,€18.63,€18.63
+"April 13, 2022",Tax,"Refund to buyer for sales tax","Order #2358294329",EUR,--,€27.37,€27.37
+"April 13, 2022",VAT,"VAT: Processing Fee","order: 2358294329",EUR,--,€3.91,€3.91
+"April 13, 2022",Refund,"Refund to buyer for Order #2358294329",,EUR,-€458.37,--,-€458.37
+"April 11, 2022",Deposit,"€354.39 sent to your bank account",,EUR,--,--,--
+"April 11, 2022",VAT,"VAT: renew sold","renew sold: 1168934951",EUR,--,-€0.04,-€0.04
+"April 11, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1168934951",EUR,--,-€0.18,-€0.18
+"April 10, 2022",VAT,"VAT: transaction","transaction: 2962920490",EUR,--,-€4.32,-€4.32
+"April 10, 2022",VAT,"VAT: Processing Fee","order: 2439653793",EUR,--,-€3.72,-€3.72
+"April 10, 2022",Tax,"Sales tax paid by buyer","Order #2439653793",EUR,--,-€34.12,-€34.12
+"April 10, 2022",Fee,"Processing fee","Order #2439653793",EUR,--,-€17.72,-€17.72
+"April 10, 2022",Sale,"Payment for Order #2439653793",,EUR,€435.52,--,€435.52
+"April 10, 2022",Fee,"Transaction fee: Simple Wedding Dress, Off Shoulder Weddi...","Order #2439653793",EUR,--,-€20.59,-€20.59
+"April 9, 2022",VAT,"VAT: auto-renew expired","auto-renew expired: 878566513",EUR,--,-€0.04,-€0.04
+"April 9, 2022",Fee,"Listing fee ($0.20 USD)","Listing #878566513",EUR,--,-€0.18,-€0.18
+"April 7, 2022",VAT,"VAT: auto-renew expired","auto-renew expired: 864650914",EUR,--,-€0.04,-€0.04
+"April 7, 2022",Fee,"Listing fee ($0.20 USD)","Listing #864650914",EUR,--,-€0.18,-€0.18
+"April 5, 2022",Deposit,"€338.72 sent to your bank account",,EUR,--,--,--
+"April 4, 2022",VAT,"VAT: listing","listing: 1209170337",EUR,--,-€0.04,-€0.04
+"April 4, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1209170337",EUR,--,-€0.18,-€0.18
+"April 4, 2022",VAT,"VAT: renew sold","renew sold: 878568533",EUR,--,-€0.04,-€0.04
+"April 4, 2022",Fee,"Listing fee ($0.20 USD)","Listing #878568533",EUR,--,-€0.18,-€0.18
+"April 4, 2022",VAT,"VAT: auto-renew expired","auto-renew expired: 864653704",EUR,--,-€0.04,-€0.04
+"April 4, 2022",VAT,"VAT: Offsite Ads fee","order: 2432443777",EUR,--,-€10.94,-€10.94
+"April 4, 2022",VAT,"VAT: transaction","transaction: 2957657221",EUR,--,-€4.28,-€4.28
+"April 4, 2022",VAT,"VAT: shipping transaction",,EUR,--,-€0.28,-€0.28
+"April 4, 2022",Fee,"Listing fee ($0.20 USD)","Listing #864653704",EUR,--,-€0.18,-€0.18
+"April 4, 2022",VAT,"VAT: Processing Fee","order: 2432443777",EUR,--,-€3.62,-€3.62
+"April 4, 2022",Marketing,"Fee for sale made through Offsite Ads","Order #2432443777",EUR,--,-€52.11,-€52.11
+"April 4, 2022",Fee,"Transaction fee: Shipping","Order #2432443777",EUR,--,-€1.32,-€1.32
+"April 4, 2022",Fee,"Transaction fee: Simple Mermaid Wedding Dress | Minimalis...","Order #2432443777",EUR,--,-€20.40,-€20.40
+"April 4, 2022",Fee,"Processing fee","Order #2432443777",EUR,--,-€17.23,-€17.23
+"April 4, 2022",Sale,"Payment for Order #2432443777",,EUR,€423.37,--,€423.37
+"April 3, 2022",VAT,"VAT: listing","listing: 1208758653",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208758653",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1194795418",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1194795418",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208685511",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208685511",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208683123",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208683123",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208678049",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208678049",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208578183",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208578183",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208577727",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208577727",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208577329",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208577329",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208576773",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208576773",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1208576397",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1208576397",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1194615278",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1194615278",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: renew","renew: 878566137",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #878566137",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1194613704",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1194613704",EUR,--,-€0.18,-€0.18
+"April 3, 2022",VAT,"VAT: listing","listing: 1194613206",EUR,--,-€0.04,-€0.04
+"April 3, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1194613206",EUR,--,-€0.18,-€0.18
+"April 2, 2022",Fee,"Credit for transaction fee on Simple Mid-Calf Off The Shoulder Wedding...","Order #2349046428",EUR,--,€21.59,€21.59
+"April 2, 2022",VAT,"VAT: transaction credit","transaction credit: 2841812376",EUR,--,€4.53,€4.53
+"April 2, 2022",Payment,"Charge for refund 2349046428",,EUR,€402.77,--,€402.77
+"April 2, 2022",Fee,"Credit for listing fee ($0.20 USD)","Listing #1108811202",EUR,--,€0.18,€0.18
+"April 2, 2022",VAT,"VAT: renew sold auto credit","renew sold auto credit: 1108811202",EUR,--,€0.04,€0.04
+"April 2, 2022",VAT,"VAT: Processing Fee","order: 2349046428",EUR,--,€3.81,€3.81
+"April 2, 2022",Fee,"Credit for processing fee","Order #2349046428",EUR,--,€18.15,€18.15
+"April 2, 2022",Tax,"Refund to buyer for sales tax","Order #2349046428",EUR,--,€25.26,€25.26
+"April 2, 2022",Refund,"Refund to buyer for Order #2349046428",,EUR,-€446.18,--,-€446.18
+"April 1, 2022",VAT,"VAT: renew expired","renew expired: 1122786915",EUR,--,-€0.04,-€0.04
+"April 1, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1122786915",EUR,--,-€0.18,-€0.18
+"April 1, 2022",VAT,"VAT: listing","listing: 1207529075",EUR,--,-€0.04,-€0.04
+"April 1, 2022",VAT,"VAT: listing","listing: 1207529019",EUR,--,-€0.04,-€0.04
+"April 1, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1207529075",EUR,--,-€0.18,-€0.18
+"April 1, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1207529019",EUR,--,-€0.18,-€0.18
+"April 1, 2022",VAT,"VAT: listing","listing: 1193569650",EUR,--,-€0.04,-€0.04
+"April 1, 2022",Fee,"Listing fee ($0.20 USD)","Listing #1193569650",EUR,--,-€0.18,-€0.18
+"April 1, 2022",Deposit,"€347.02 sent to your bank account",,EUR,--,--,--

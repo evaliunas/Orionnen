@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AmberLabs - Import Data File</title>
+</div>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <p class="lead"><h3>Upload data file</h3></p> <br>
+    <form class="" action="/upload" method="POST" enctype=multipart/form-data>
+        <input type="file" name="csvfile" value="">
+        <input type="submit" class="btn btn-dark" name="" value="Upload">
+    </form>
+</div>
+{% if rows > 0 %}
+<br>
+<div style="background-color:green;color:white;padding:1%;width:366px;text-align:center">{{ rows }} rows uploaded successfully!</div>
+{% endif %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AmberLabs - Order {sale.order_id}}</title>
+    <style>
+    .container-border
+    {background: #dbdee6; padding: 2%;
+    border-top-color: black;
+    border-bottom-color: black;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-style: solid;
+    border-bottom-style: solid;}
+    </style>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+  <h1>
+    Order #{{ sale.order_id }} <a class="btn btn-dark" href="{{ url_for('edit_order', order_id=sale.order_id) }}">Edit</a>
+  </h1><br>
+</header>
+
+<div class="container-border">
+  <div class="row">
+    <div class="col">
+      <h4 style="text-align:left">Date: {{ sale.date }}</h4>
+    </div>
+    <div class="col">
+      <h4 style="text-align:center">Buyer: {{ sale.buyer }}</h4>
+    </div>
+    <div class="col">
+      <h4 style="text-align:center">SKU: {{ sale.sku }}</h4>
+    </div>
+    <div class="col">
+      <h4 style="text-align:right">Status:</h4>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ sale.status }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Ordered') }}">Ordered</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Under production') }}">Under production</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Shipped to warehouse') }}">Shipped to warehouse</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='In warehouse') }}">In warehouse</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Shipped to buyer') }}">Shipped to buyer</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Delivered') }}">Delivered</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Waiting for return') }}">Waiting for return</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=sale.order_id, status='Returned/refunded') }}">Returned/refunded</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><br>
+<div class="container">
+  <div class="accordion" id="accordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <h5>Revenue: {{ sale.net_revenue }} €</h5>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Order revenue: {{ sale.revenue }} €<br>
+        Refund: {{ sale.refund }} €
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <h5>Costs: {{ sale.costs }} €</h5>
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="accordion" id="accordion2">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+              <h6>Etsy costs: {{ sale.etsy_costs }} €</h6>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>Processing fee: {{ sale.net_proc_fee }} €</strong><br>
+              Order processing fee: {{ sale.proc_fee }} €<br>
+              Refunded processing fee: {{ sale.cred_proc_fee }} €<br><br>
+              <strong>Transaction fee: {{ sale.net_trans_fee }} €</strong><br>
+              Order transaction fee: {{ sale.trans_fee }} €<br>
+              Refunded transaction fee: {{ sale.cred_trans_fee }} €<br><br>
+              <strong>Add fee: {{ sale.net_ad_fee }} €</strong><br>
+              Order add fee: {{ sale.ad_fee }} €<br>
+              Refunded add fee: {{ sale.cred_ad_fee }} €<br><br>
+              <strong>Buyer's paid taxes: {{ sale.net_tax }} €</strong><br>
+              Order taxes: {{ sale.tax }} €<br>
+              Refunded taxes: {{ sale.cred_tax }} €<br><br>
+              <strong>VAT: {{ sale.net_vat }} €</strong><br>
+              Order VAT: {{ sale.vat }} €<br>
+              Refunded VAT: {{ sale.cred_vat }} €<br>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+              <h6>Other costs: {{ sale.costs - sale.etsy_costs }} €</h6>
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Production costs: {{ sale.prod_costs }} €<br>
+              Shipping costs: {{ sale.ship_costs }} €<br>
+              Undefined costs: {{ sale.undef_costs }} €
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div><br>
+<form action="#" method="post" class="container-border">
+  <div class="row">
+    <div class="col">
+      <h4>Profit: {{ sale.profit }} €</h4>
+    </div>
+    <div class="col">
+      <h4 style="text-align:right">Note:</h4>
+    </div>
+    <div class="col">
+      <div class="input-group">
+          <span class="input-group-text">{{ sale.note}}</span>
+          <input type="text" class="form-control" name="note" placeholder="Edit">
+          <input class="btn btn-dark" type="submit" value="Submit"/>
+        </div>
+    </div>
+  </div>
+</form><br>
+{% endblock %}
+</body>
+</html>
