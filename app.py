@@ -53,6 +53,7 @@ class Sales(db.Model):
     prod_costs = db.Column(db.Float)
     ship_costs = db.Column(db.Float)
     undef_costs = db.Column(db.Float)
+    other_costs = db.Column(db.Float)
     costs = db.Column(db.Float)
     profit = db.Column(db.Float)
     note = db.Column(db.Text)
@@ -71,7 +72,7 @@ class Sales(db.Model):
                  vat_ship_trans=0, cred_vat_ship_trans=0,
                  tax=0, cred_tax=0, net_tax=0,
                  trans_fee=0, cred_trans_fee=0, net_trans_fee=0,
-                 vat=0, cred_vat=0, undef_costs=0, net_vat=0,
+                 vat=0, cred_vat=0, undef_costs=0, net_vat=0, other_costs=0,
                  etsy_costs=0, prod_costs=0, ship_costs=0, costs=0, profit=0):
         self.order_id = order_id
         self.date = date
@@ -113,6 +114,7 @@ class Sales(db.Model):
         self.prod_costs = prod_costs
         self.ship_costs = ship_costs
         self.undef_costs = undef_costs
+        self.other_costs = other_costs
         self.costs = costs
         self.profit = profit
 

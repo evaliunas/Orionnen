@@ -187,6 +187,7 @@ def update_data():
         sale.etsy_costs = D(str(sale.net_proc_fee)) + D(str(sale.net_ad_fee)) \
                         + D(str(sale.net_tax)) + D(str(sale.net_vat)) \
                         + D(str(sale.net_trans_fee))
-        sale.costs = D(str(sale.etsy_costs)) + D(str(sale.prod_costs)) + D(str(sale.ship_costs)) + D(str(sale.undef_costs))
+        sale.other_costs = D(str(sale.prod_costs)) + D(str(sale.ship_costs)) + D(str(sale.undef_costs))
+        sale.costs = D(str(sale.etsy_costs)) + D(str(sale.other_costs))
         sale.profit = D(str(sale.net_revenue)) - D(str(sale.costs))
         db.session.commit()
