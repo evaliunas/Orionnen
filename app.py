@@ -132,7 +132,7 @@ def home():
         data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         dates = []
         profits = []
-    return render_template("home.html", data=data, month=month, dates=dates, profits=profits)
+    return render_template("index.html", data=data, month=month, dates=dates, profits=profits)
 
 @app.route('/dashboard/month=<month>', methods=['GET', 'POST'])
 def show_dashboard(month):
@@ -145,7 +145,7 @@ def show_dashboard(month):
         data = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         dates = []
         profits = []
-    return render_template("home.html", data=data, month=month, dates=dates, profits=profits)
+    return render_template("index.html", data=data, month=month, dates=dates, profits=profits)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
