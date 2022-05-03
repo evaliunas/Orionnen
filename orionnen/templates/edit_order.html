@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    Order #{{ order.order_id }} <a class="btn btn-outline-dark" href="{{ url_for('view_order', order_id=order.order_id) }}">Back to order</a>
+  </h1><br>
+  <div class="content-section">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Edit Order</legend>
+        <div class="form-group">
+          {{ form.buyer.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">{{ order.buyer }}</span>
+            {{ form.buyer(class='form-control form-control-lg') }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.sku.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">{{ order.sku }}</span>
+          {{ form.sku(class="form-control form-control-lg") }}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.prod_costs.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">€</span>
+            <span class="input-group-text">{{ order.prod_costs }}</span>
+            {% if form.prod_costs.errors %}
+              {{ form.prod_costs(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+              {% for error in form.prod_costs.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+              {{ form.prod_costs(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.ship_costs.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">€</span>
+            <span class="input-group-text">{{ order.ship_costs }}</span>
+            {% if form.ship_costs.errors %}
+              {{ form.ship_costs(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+              {% for error in form.ship_costs.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+              </div>
+            {% else %}
+              {{ form.ship_costs(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.undef_costs.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">€</span>
+            <span class="input-group-text">{{ order.undef_costs }}</span>
+            {% if form.undef_costs.errors %}
+              {{ form.undef_costs(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+              {% for error in form.undef_costs.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+              </div>
+            {% else %}
+              {{ form.undef_costs(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.note.label(class="form-control-label") }}
+          <div class="input-group">
+            <span class="input-group-text">{{ order.note }}</span>
+            {{ form.note(class="form-control form-control-lg") }}
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        {{ form.submit(class="btn btn-outline-dark") }}
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

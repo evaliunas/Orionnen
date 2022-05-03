@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="content-section"><h1>Welcome to Orionnen!</h1></div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have an account?<a class="ml-2" href="{{ url_for('login') }}">Sign In</a><br>
+            Don't have an account?<a class="ml-2" href="{{ url_for('register') }}">Join Us</a>
+        </small>
+    </div>
+
+{% endblock %}

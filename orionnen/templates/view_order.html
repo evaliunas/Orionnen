@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <header>
+    <h1>
+      Order #{{ order.order_id }} <a class="btn btn-outline-dark" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a>
+    </h1><br>
+  </header>
+
+  <div class="container-border">
+    <div class="row">
+      <div class="col">
+        <h4 style="text-align:left">Date: {{ order.date }}</h4>
+      </div>
+      <div class="col">
+        <h4 style="text-align:center">Buyer: {{ order.buyer }}</h4>
+      </div>
+      <div class="col">
+        <h4 style="text-align:center">SKU: {{ order.sku }}</h4>
+      </div>
+      <div class="col">
+        <h4 style="text-align:right">Status:</h4>
+      </div>
+      <div class="col">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ order.status }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Ordered') }}">Ordered</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Under production') }}">Under production</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Shipped to warehouse') }}">Shipped to warehouse</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='In warehouse') }}">In warehouse</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Shipped to buyer') }}">Shipped to buyer</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Delivered') }}">Delivered</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Waiting for return') }}">Waiting for return</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Returned/refunded') }}">Returned/refunded</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><br>
+
+  <div class="container-border">
+    <div class="accordion" id="accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <h5>Revenue: {{ order.net_revenue }} €</h5>
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          Order revenue: {{ order.revenue }} €<br>
+          Refund: {{ order.refund }} €
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <h5>Costs: {{ order.costs }} €</h5>
+        </button>
+      </h2>
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="accordion" id="accordion2">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <h6>Etsy costs: {{ order.etsy_costs }} €</h6>
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <strong>Processing fee: {{ order.net_proc_fee }} €</strong><br>
+                Order processing fee: {{ order.proc_fee }} €<br>
+                Refunded processing fee: {{ order.cred_proc_fee }} €<br><br>
+                <strong>Transaction fee: {{ order.net_trans_fee }} €</strong><br>
+                Order transaction fee: {{ order.trans_fee }} €<br>
+                Refunded transaction fee: {{ order.cred_trans_fee }} €<br><br>
+                <strong>Add fee: {{ order.net_ad_fee }} €</strong><br>
+                Order add fee: {{ order.ad_fee }} €<br>
+                Refunded add fee: {{ order.cred_ad_fee }} €<br><br>
+                <strong>Buyer's paid taxes: {{ order.net_tax }} €</strong><br>
+                Order taxes: {{ order.tax }} €<br>
+                Refunded taxes: {{ order.cred_tax }} €<br><br>
+                <strong>VAT: {{ order.net_vat }} €</strong><br>
+                Order VAT: {{ order.vat }} €<br>
+                Refunded VAT: {{ order.cred_vat }} €<br>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                <h6>Other costs: {{ order.other_costs }} €</h6>
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                Production costs: {{ order.prod_costs }} €<br>
+                Shipping costs: {{ order.ship_costs }} €<br>
+                Undefined costs: {{ order.undef_costs }} €
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div><br>
+
+  <div class="container-border">
+    <div class="row">
+      <div class="col">
+        <h4>Profit: {{ order.profit }} €</h4>
+      </div>
+      <div class="col">
+        <h4 style="text-align:right">Note:</h4>
+      </div>
+      <div class="col">
+        <form action="#" method="post">
+          <div class="input-group">
+            <span class="input-group-text">{{ order.note}}</span>
+            <input type="text" class="form-control" name="note" placeholder="Edit">
+            <input class="btn btn-outline-dark" type="submit" value="Submit"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
