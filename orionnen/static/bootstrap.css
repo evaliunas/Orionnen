@@ -1900,7 +1900,8 @@ progress {
   width: 100%;
   margin-bottom: 1rem;
   color: #55595c;
-  vertical-align: top;
+  vertical-align: middle;
+  text-align: center;
   border-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -1916,7 +1917,7 @@ progress {
 }
 
 .table > thead {
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 
 .table > :not(:first-child) {
@@ -3628,8 +3629,8 @@ fieldset:disabled .btn {
 }
 
 .btn-sm, .btn-group-sm > .btn {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.2rem 0.4rem;
+  font-size: 1.1rem;
   border-radius: 0;
 }
 
@@ -11176,7 +11177,7 @@ th {
 
 .table th,
 .table td {
-  padding: 1.5rem;
+  padding: 0.6rem;
 }
 
 .table-sm th,

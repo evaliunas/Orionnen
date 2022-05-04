@@ -4,15 +4,15 @@
 
     <table id="Orders" class="table table-hover">
         <tr class="header">
-          <th style="text-align:center; vertical-align: middle;" width="8%">
-              ID
-              <input type="text" id="ID" onkeyup="filter_ID()" placeholder="Search ID" style="width: 130px;">
+          <th>
+              ID<br>
+              <input type="text" id="ID" onkeyup="filter_ID()" placeholder="Search ID" style="width: 110px; height: 30px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="8%">
-              Date
+          <th>
+              Date<br>
               <div class="dropdown">
-                    <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose month
+                    <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="width: 110px; height: 30px;">
+                        Filter month
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{ url_for('show_orders') }}">All months</a></li>
@@ -32,22 +32,22 @@
                     </ul>
               </div>
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="8%">
-              Buyer
-              <input type="text" id="Buyer" onkeyup="filter_buyer()" placeholder="Search buyer" style="width: 130px;">
+          <th>
+              Buyer<br>
+              <input type="text" id="Buyer" onkeyup="filter_buyer()" placeholder="Search buyer" style="width: 110px; height: 30px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="8%">
-              SKU
-              <input type="text" id="SKU" onkeyup="filter_SKU()" placeholder="Search SKU" style="width: 130px;">
+          <th>
+              SKU<br>
+              <input type="text" id="SKU" onkeyup="filter_SKU()" placeholder="Search SKU" style="width: 110px; height: 30px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="11%">Revenue</th>
-          <th style="text-align:center; vertical-align: middle;" width="11%">Costs</th>
-          <th style="text-align:center; vertical-align: middle;" width="11%">Profit</th>
-          <th style="text-align:center; vertical-align: middle;" width="11%">
+          <th>Revenue</th>
+          <th>Costs</th>
+          <th>Profit</th>
+          <th>
               Status
               <div class="dropdown">
-                    <button class="btn btn-dark btn-sm dropdown-toggle" style="width: 180px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose status
+                    <button class="btn btn-dark btn-sm dropdown-toggle" style="width: 180px; height: 30px;";" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter status
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{ url_for('show_orders') }}">All statuses</a></li>
@@ -55,15 +55,15 @@
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Ordered', month=month) }}">Ordered</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Under production', month=month) }}">Under production</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Shipped to warehouse', month=month) }}">Shipped to warehouse</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='In warehouse', month=month) }}">In warehouse</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Shipped to buyer', month=month) }}">Shipped to buyer</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Delivered', month=month) }}">Delivered</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Waiting for return', month=month) }}">Waiting for return</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Returned/refunded', month=month) }}">Returned/refunded</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('show_orders_status', status='Canceled', month=month) }}">Canceled</a></li>
                     </ul>
                 </div>
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="20%"> </th>
+          <th></th>
         </tr>
       <tbody>
         {% for order in orders %}
@@ -76,19 +76,28 @@
                 <td style="text-align:center; vertical-align:middle">{{ order.costs }} €</td>
                 <td style="text-align:center; vertical-align:middle">{{ order.profit }} €</td>
                 <td style="text-align:center; vertical-align:middle">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle" style="width: 180px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ order.status }}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Under production') }}">Under production</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Shipped to warehouse') }}">Shipped to warehouse</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='In warehouse') }}">In warehouse</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Shipped to buyer') }}">Shipped to buyer</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Delivered') }}">Delivered</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Waiting for return') }}">Waiting for return</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('change_status', order_id=order.order_id, status='Returned/refunded') }}">Returned/refunded</a></li>
-                        </ul>
+                    <div class="progress">
+                      {% if order.status == 'Ordered' %}
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Under production' %}
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Shipped to warehouse' %}
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Shipped to buyer' %}
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Delivered' %}
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Waiting for return' %}
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+                      {% endif %}
+                      {% if order.status == 'Canceled' %}
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                      {% endif %}
                     </div>
                 </td>
                 <td align="center"><a class="btn btn-outline-dark btn-sm" href="{{ url_for('view_order', order_id=order.order_id) }}">View</a> <a class="btn btn-outline-dark btn-sm" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a></td>

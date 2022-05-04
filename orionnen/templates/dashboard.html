@@ -7,68 +7,110 @@
 
 {% block content %}
 
-    <div class="content-section" style="text-align:center">
-        {% if month == 'all' %}
-        <h2>Your full year statistics</h2>
-        {% endif %}
-        {% if month == '01' %}
-        <h2>Your January statistics</h2>
-        {% endif %}
-        {% if month == '02' %}
-        <h2>Your February statistics</h2>
-        {% endif %}
-        {% if month == '03' %}
-        <h2>Your March statistics</h2>
-        {% endif %}
-        {% if month == '04' %}
-        <h2>Your April statistics</h2>
-        {% endif %}
-        {% if month == '05' %}
-        <h2>Your May statistics</h2>
-        {% endif %}
-        {% if month == '06' %}
-        <h2>Your June statistics</h2>
-        {% endif %}
-        {% if month == '07' %}
-        <h2>Your July statistics</h2>
-        {% endif %}
-        {% if month == '08' %}
-        <h2>Your August statistics</h2>
-        {% endif %}
-        {% if month == '09' %}
-        <h2>Your September statistics</h2>
-        {% endif %}
-        {% if month == '10' %}
-        <h2>Your October statistics</h2>
-        {% endif %}
-        {% if month == '11' %}
-        <h2>Your November statistics</h2>
-        {% endif %}
-        {% if month == '12' %}
-        <h2>Your December statistics</h2>
-        {% endif %}
-    </div>
-    <div class="dropdown">
-        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Select month
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="{{ url_for('home') }}">All months</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='01') }}">January</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='02') }}">February</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='03') }}">March</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='04') }}">April</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='05') }}">May</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='06') }}">June</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='07') }}">July</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='08') }}">August</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='09') }}">September</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='10') }}">October</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='11') }}">November</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='12') }}">December</a></li>
-        </ul>
-    </div>
+    <div container>
+        <div class="row">
+            <div class="col" style="min-width: 69%; text-align:right;">
+                {% if month == 'all' %}
+                    <h2>Full year dashboard</h2>
+                {% endif %}
+                {% if month == '01' %}
+                    <h2>January dashboard</h2>
+                {% endif %}
+                {% if month == '02' %}
+                    <h2>February dashboard</h2>
+                {% endif %}
+                {% if month == '03' %}
+                    <h2>March dashboard</h2>
+                {% endif %}
+                {% if month == '04' %}
+                    <h2>April dashboard</h2>
+                {% endif %}
+                {% if month == '05' %}
+                    <h2>May dashboard</h2>
+                {% endif %}
+                {% if month == '06' %}
+                    <h2>June dashboard</h2>
+                {% endif %}
+                {% if month == '07' %}
+                    <h2>July dashboard</h2>
+                {% endif %}
+                {% if month == '08' %}
+                    <h2>August dashboard</h2>
+                {% endif %}
+                {% if month == '09' %}
+                    <h2>September dashboard</h2>
+                {% endif %}
+                {% if month == '10' %}
+                    <h2>October dashboard</h2>
+                {% endif %}
+                {% if month == '11' %}
+                    <h2>November dashboard</h2>
+                {% endif %}
+                {% if month == '12' %}
+                <   h2>December dashboard</h2>
+                {% endif %}
+            </div>
+            <div class="col" style="text-align:right;"">
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select month
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ url_for('home') }}">All months</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='01') }}">January</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='02') }}">February</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='03') }}">March</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='04') }}">April</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='05') }}">May</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='06') }}">June</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='07') }}">July</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='08') }}">August</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='09') }}">September</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='10') }}">October</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='11') }}">November</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='12') }}">December</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><br><br>
+
+    <div container style="max-width: 100%;">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" style="text-align:center">Your orders</h4>
+                    <p class="card-text" style="text-align:center">{{ data[0] }}</p>
+                  </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align:center">Your revenue</h4>
+                        <p class="card-text" style="text-align:center">{{ data[2] }} €</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align:center">Your costs</h4>
+                        <p class="card-text" style="text-align:center">{{ data[4] }} €</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align:center">Your profit</h4>
+                        <p class="card-text" style="text-align:center">{{ data[14] }} €</p>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
 
     {% if data[0] > 0 %}
         <canvas id="lineChart" width="1300" height="400"></canvas>
@@ -80,7 +122,7 @@
                         labels: {{ dates | safe }},
                         datasets: [
                             {
-                                label: "Profit",
+                                label: "Daily Profit",
                                 data: {{ profits | safe }},
                                 fill: false,
                                 borderColor: "#846cc2",

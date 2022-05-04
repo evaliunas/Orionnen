@@ -17,9 +17,9 @@ def upload_data(df, rows):
                     i += 1
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
             order = Order.query.filter_by(order_id=order_id).first()
             if not order:
+                date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
@@ -39,9 +39,9 @@ def upload_data(df, rows):
                     i += 1
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
             order = Order.query.filter_by(order_id=order_id).first()
             if not order:
+                date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
@@ -55,9 +55,9 @@ def upload_data(df, rows):
             order_id = int(''.join(filter(str.isdigit, df.loc[row, 'Title'])))
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
             order = Order.query.filter_by(order_id=order_id).first()
             if not order:
+                date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
@@ -69,11 +69,11 @@ def upload_data(df, rows):
 
         if 'rder' in str(df.loc[row, 'Info']):
             order_id = int(''.join(filter(str.isdigit, df.loc[row, 'Info'])))
-            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
             order = Order.query.filter_by(order_id=order_id).first()
             if not order:
+                date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
