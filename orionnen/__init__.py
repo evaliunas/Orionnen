@@ -19,8 +19,8 @@ login_manager.login_message_category = 'info'
 app.config['MAIL_SERVER'] = 'smtp.hostinger.com'
 app.config['MAIL_PORT'] = '465'
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'e.valiunas@.com'
-app.config['MAIL_PASSWORD'] = '093328bolton'
+app.config['MAIL_USERNAME'] = ''
+app.config['MAIL_PASSWORD'] = ''
 mail = Mail(app)
 
 from orionnen import routes

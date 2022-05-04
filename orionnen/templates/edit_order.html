@@ -16,19 +16,19 @@
             <span class="input-group-text">{{ order.buyer }}</span>
             {{ form.buyer(class='form-control form-control-lg') }}
           </div>
-        </div>
+        </div><br>
         <div class="form-group">
           {{ form.sku.label(class="form-control-label") }}
           <div class="input-group">
             <span class="input-group-text">{{ order.sku }}</span>
           {{ form.sku(class="form-control form-control-lg") }}
           </div>
-        </div>
+        </div><br>
         <div class="form-group">
           {{ form.prod_costs.label(class="form-control-label") }}
           <div class="input-group">
-            <span class="input-group-text">€</span>
             <span class="input-group-text">{{ order.prod_costs }}</span>
+            <span class="input-group-text">€</span>
             {% if form.prod_costs.errors %}
               {{ form.prod_costs(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
@@ -40,12 +40,12 @@
               {{ form.prod_costs(class="form-control form-control-lg") }}
             {% endif %}
           </div>
-        </div>
+        </div><br>
         <div class="form-group">
           {{ form.ship_costs.label(class="form-control-label") }}
           <div class="input-group">
-            <span class="input-group-text">€</span>
             <span class="input-group-text">{{ order.ship_costs }}</span>
+            <span class="input-group-text">€</span>
             {% if form.ship_costs.errors %}
               {{ form.ship_costs(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
@@ -57,12 +57,12 @@
               {{ form.ship_costs(class="form-control form-control-lg") }}
             {% endif %}
           </div>
-        </div>
+        </div><br>
         <div class="form-group">
           {{ form.undef_costs.label(class="form-control-label") }}
           <div class="input-group">
-            <span class="input-group-text">€</span>
             <span class="input-group-text">{{ order.undef_costs }}</span>
+            <span class="input-group-text">€</span>
             {% if form.undef_costs.errors %}
               {{ form.undef_costs(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
@@ -74,14 +74,14 @@
               {{ form.undef_costs(class="form-control form-control-lg") }}
             {% endif %}
           </div>
-        </div>
+        </div><br>
         <div class="form-group">
           {{ form.note.label(class="form-control-label") }}
           <div class="input-group">
             <span class="input-group-text">{{ order.note }}</span>
             {{ form.note(class="form-control form-control-lg") }}
           </div>
-        </div>
+        </div><br>
       </fieldset>
       <div class="form-group">
         {{ form.submit(class="btn btn-outline-dark") }}

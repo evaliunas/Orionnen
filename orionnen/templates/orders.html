@@ -4,11 +4,11 @@
 
     <table id="Orders" class="table table-hover">
         <tr class="header">
-          <th style="text-align:center; vertical-align: middle;" width="10%">
+          <th style="text-align:center; vertical-align: middle;" width="8%">
               ID
               <input type="text" id="ID" onkeyup="filter_ID()" placeholder="Search ID" style="width: 130px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">
+          <th style="text-align:center; vertical-align: middle;" width="8%">
               Date
               <div class="dropdown">
                     <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,18 +32,18 @@
                     </ul>
               </div>
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">
+          <th style="text-align:center; vertical-align: middle;" width="8%">
               Buyer
               <input type="text" id="Buyer" onkeyup="filter_buyer()" placeholder="Search buyer" style="width: 130px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">
+          <th style="text-align:center; vertical-align: middle;" width="8%">
               SKU
               <input type="text" id="SKU" onkeyup="filter_SKU()" placeholder="Search SKU" style="width: 130px;">
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">Revenue</th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">Costs</th>
-          <th style="text-align:center; vertical-align: middle;" width="10%">Profit</th>
-          <th style="text-align:center; vertical-align: middle;" width="12%">
+          <th style="text-align:center; vertical-align: middle;" width="11%">Revenue</th>
+          <th style="text-align:center; vertical-align: middle;" width="11%">Costs</th>
+          <th style="text-align:center; vertical-align: middle;" width="11%">Profit</th>
+          <th style="text-align:center; vertical-align: middle;" width="11%">
               Status
               <div class="dropdown">
                     <button class="btn btn-dark btn-sm dropdown-toggle" style="width: 180px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +63,7 @@
                     </ul>
                 </div>
           </th>
-          <th style="text-align:center; vertical-align: middle;" width="18%"> </th>
+          <th style="text-align:center; vertical-align: middle;" width="20%"> </th>
         </tr>
       <tbody>
         {% for order in orders %}
@@ -91,70 +91,70 @@
                         </ul>
                     </div>
                 </td>
-                <td align="center"><a class="btn btn-outline-dark" href="{{ url_for('view_order', order_id=order.order_id) }}">View</a> <a class="btn btn-outline-dark" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a></td>
+                <td align="center"><a class="btn btn-outline-dark btn-sm" href="{{ url_for('view_order', order_id=order.order_id) }}">View</a> <a class="btn btn-outline-dark btn-sm" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a></td>
             </tr>
         {% endfor %}
       </tbody>
     </table>
 
+    <script>
+        function filter_ID() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("ID");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Orders");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                    tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        function filter_buyer() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Buyer");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Orders");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                    tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        function filter_SKU() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("SKU");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Orders");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                    tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
 {% endblock %}
-
-<script>
-    function filter_ID() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("ID");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("Orders");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-    function filter_buyer() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("Buyer");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("Orders");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-    function filter_SKU() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("SKU");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("Orders");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[3];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>

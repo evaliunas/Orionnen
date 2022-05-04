@@ -1,6 +1,6 @@
-import datetime
+from datetime import datetime
 from orionnen import db
-from orionnen.models import Order, User
+from orionnen.models import Order
 from decimal import Decimal as D
 from flask_login import current_user
 
@@ -17,23 +17,18 @@ def upload_data(df, rows):
                     i += 1
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
-            if bool(Order.query.filter_by(order_id=order_id).first()) == True:
-                order = Order.query.filter_by(order_id=order_id).first()
-                if data < 0:
-                    order.vat_ship_trans = abs(data)
-                else:
-                    order.cred_vat_ship_trans = data
-                db.session.commit()
-            else:
+            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
+            order = Order.query.filter_by(order_id=order_id).first()
+            if not order:
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
-                if data < 0:
-                    order.vat_ship_trans = abs(data)
-                else:
-                    order.cred_vat_ship_trans = data
-                db.session.commit()
+            if data < 0:
+                order.vat_ship_trans = abs(data)
+            else:
+                order.cred_vat_ship_trans = data
+            db.session.commit()
+
         if 'transaction' in str(df.loc[row, 'Info']):
             i = 1
             while True:
@@ -44,130 +39,81 @@ def upload_data(df, rows):
                     i += 1
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
-            if bool(Order.query.filter_by(order_id=order_id).first()) == True:
-                order = Order.query.filter_by(order_id=order_id).first()
-                if data < 0:
-                    order.vat_trans = abs(data)
-                else:
-                    order.cred_vat_trans = data
-                db.session.commit()
-            else:
+            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
+            order = Order.query.filter_by(order_id=order_id).first()
+            if not order:
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
-                if data < 0:
-                    order.vat_trans = abs(data)
-                else:
-                    order.cred_vat_trans = data
-                db.session.commit()
-        if 'order' in str(df.loc[row, 'Type']) or 'Refund' in str(df.loc[row, 'Type']):
+            if data < 0:
+                order.vat_trans = abs(data)
+            else:
+                order.cred_vat_trans = data
+            db.session.commit()
+
+        if 'Sale' in str(df.loc[row, 'Type']) or 'Refund' in str(df.loc[row, 'Type']):
             order_id = int(''.join(filter(str.isdigit, df.loc[row, 'Title'])))
             data_num = df.loc[row, 'Net'].replace('€', '')
             data = float(data_num)
-            date = datetime.datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
-            if bool(Order.query.filter_by(order_id=order_id).first()) == True:
-                order = Order.query.filter_by(order_id=order_id).first()
-                if 'order' in str(df.loc[row, 'Type']):
-                    order.revenue = data
-                else:
-                    order.refund = abs(data)
-                db.session.commit()
-            else:
+            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
+            order = Order.query.filter_by(order_id=order_id).first()
+            if not order:
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
-                if 'order' in str(df.loc[row, 'Type']):
-                    order.revenue = data
-                else:
-                    order.refund = abs(data)
-                db.session.commit()
+            if 'Sale' in str(df.loc[row, 'Type']):
+                order.revenue = data
+            else:
+                order.refund = abs(data)
+            db.session.commit()
+
         if 'rder' in str(df.loc[row, 'Info']):
             order_id = int(''.join(filter(str.isdigit, df.loc[row, 'Info'])))
-            if bool(Order.query.filter_by(order_id=order_id).first()) == True:
-                order = Order.query.filter_by(order_id=order_id).first()
-                data_num = df.loc[row, 'Net'].replace('€', '')
-                data = float(data_num)
-                if 'rocessing' in str(df.loc[row, 'Title']):
-                    if 'VAT' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.vat_proc_fee = abs(data)
-                        else:
-                            order.cred_vat_proc_fee = data
-                    elif data < 0:
-                        order.proc_fee = abs(data)
-                    else:
-                        order.cred_proc_fee = data
-                if 'ransaction' in str(df.loc[row, 'Title']):
-                    if 'hipping' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.ship_trans_fee = abs(data)
-                        else:
-                            order.cred_ship_trans_fee = data
-                    else:
-                        if data < 0:
-                            order.trans_trans_fee = abs(data)
-                        else:
-                            order.cred_trans_trans_fee = data
-                if 'Offsite Ads' in str(df.loc[row, 'Title']):
-                    if 'VAT' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.vat_ad = abs(data)
-                        else:
-                            order.cred_vat_ad = data
-                    elif data < 0:
-                        order.ad_fee = abs(data)
-                    else:
-                        order.cred_ad_fee = data
-                if 'tax' in str(df.loc[row, 'Title']):
-                    if data < 0:
-                        order.tax = abs(data)
-                    else:
-                        order.cred_tax = data
-                db.session.commit()
-            else:
-                date = datetime.datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
+            date = datetime.strptime(str(df.loc[row, 'Date']), '%B %d, %Y')
+            data_num = df.loc[row, 'Net'].replace('€', '')
+            data = float(data_num)
+            order = Order.query.filter_by(order_id=order_id).first()
+            if not order:
                 order = Order(author=current_user, order_id=order_id, date=date)
                 db.session.add(order)
                 db.session.commit()
-                data = float(df.loc[row, 'Net'].replace('€', ''))
-                if 'rocessing' in str(df.loc[row, 'Title']):
-                    if 'VAT' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.vat_proc_fee = abs(data)
-                        else:
-                            order.cred_vat_proc_fee = data
-                    elif data < 0:
-                        order.proc_fee = abs(data)
-                    else:
-                        order.cred_proc_fee = data
-                if 'ransaction fee' in str(df.loc[row, 'Title']):
-                    if 'hipping' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.ship_trans_fee = abs(data)
-                        else:
-                            order.cred_ship_trans_fee = data
-                    else:
-                        if data < 0:
-                            order.trans_trans_fee = abs(data)
-                        else:
-                            order.cred_trans_trans_fee = data
-                if 'Offsite Ads' in str(df.loc[row, 'Title']):
-                    if 'VAT' in str(df.loc[row, 'Title']):
-                        if data < 0:
-                            order.vat_ad = abs(data)
-                        else:
-                            order.cred_vat_ad = data
-                    elif data < 0:
-                        order.ad_fee = abs(data)
-                    else:
-                        order.cred_ad_fee = data
-                if 'tax' in str(df.loc[row, 'Title']):
+            if 'rocessing' in str(df.loc[row, 'Title']):
+                if 'VAT' in str(df.loc[row, 'Title']):
                     if data < 0:
-                        order.tax = abs(data)
+                        order.vat_proc_fee = abs(data)
                     else:
-                        order.cred_tax = data
-                db.session.commit()
+                        order.cred_vat_proc_fee = data
+                elif data < 0:
+                    order.proc_fee = abs(data)
+                else:
+                    order.cred_proc_fee = data
+            if 'ransaction' in str(df.loc[row, 'Title']):
+                if 'hipping' in str(df.loc[row, 'Title']):
+                    if data < 0:
+                        order.ship_trans_fee = abs(data)
+                    else:
+                        order.cred_ship_trans_fee = data
+                elif data < 0:
+                    order.trans_trans_fee = abs(data)
+                else:
+                    order.cred_trans_trans_fee = data
+            if 'Offsite Ads' in str(df.loc[row, 'Title']):
+                if 'VAT' in str(df.loc[row, 'Title']):
+                    if data < 0:
+                        order.vat_ad = abs(data)
+                    else:
+                        order.cred_vat_ad = data
+                elif data < 0:
+                    order.ad_fee = abs(data)
+                else:
+                    order.cred_ad_fee = data
+            if 'tax' in str(df.loc[row, 'Title']):
+                if data < 0:
+                    order.tax = abs(data)
+                else:
+                    order.cred_tax = data
+            db.session.commit()
+
         row += 1
     update_data()
 

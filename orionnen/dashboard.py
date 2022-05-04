@@ -1,19 +1,24 @@
-import run
+from flask_login import current_user
+from orionnen import db
+from orionnen.models import Order
 from decimal import Decimal as D
 import datetime
 
 def calculate(month):
     if month == 'all':
-        order = run.db.session.query(app.Order).all()
-        ord_count = app.db.session.query(run.Order).count()
-        rf_count = app.db.session.query(app.Order).filter(run.Order.net_revenue == 0).count()
+        orders = db.session.query(Order).filter_by(author=current_user)
+        ord_count = db.session.query(Order).filter_by(author=current_user).count()
+        rf_count = db.session.query(Order).filter_by(author=current_user).filter(Order.net_revenue <= 0).count()
     else:
-        order = app.db.session.query(run.Order).filter(app.Order.date.between(f'2022-{month}-01', f'2022-{month}-31'))
-        ord_count = app.db.session.query(app.Order).filter(run.Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).count()
-        rf_count = run.db.session.query(app.Order).filter(
-            app.Order.date.between(f'2022-{month}-01', f'2022-{month}-31'), app.Order.net_revenue==0).count()
+        orders = db.session.query(Order).filter(Order.date.between(
+            f'2022-{month}-01', f'2022-{month}-31')).filter_by(author=current_user)
+        ord_count = db.session.query(Order).filter(Order.date.between(
+            f'2022-{month}-01', f'2022-{month}-31')).filter_by(author=current_user).count()
+        rf_count = db.session.query(Order).filter(
+            Order.date.between(f'2022-{month}-01', f'2022-{month}-31'), Order.net_revenue==0).filter_by(
+            author=current_user).count()
     net_revenue = costs = etsy_costs = prod_costs = ship_costs = undef_costs = profit = 0
-    for order in order:
+    for order in orders:
         net_revenue += D(str(order.net_revenue))
         costs += D(str(order.costs))
         prod_costs += D(str(order.prod_costs))
@@ -39,17 +44,18 @@ def linechart(month):
     dates = []
     profits = []
     if month == 'all':
-        order = app.Order.query.order_by(run.Order.date.asc())
+        orders = db.session.query(Order).filter_by(author=current_user).order_by(Order.date.asc())
     else:
-        order = app.db.session.query(run.Order).filter(app.Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).order_by(app.Order.date.asc())
-    start_date = order[0].date
-    end_date = order[-1].date
+        orders = db.session.query(Order).filter(Order.date.between(
+            f'2022-{month}-01', f'2022-{month}-31')).filter_by(author=current_user).order_by(Order.date.asc())
+    start_date = orders[0].date
+    end_date = orders[-1].date
     delta = datetime.timedelta(days=1)
     while start_date <= end_date:
         dates.append(f"{start_date.month}/{start_date.day}")
         profit = 0
-        order_day = app.db.session.query(app.Order).filter(run.Order.date == start_date)
-        for order in order_day:
+        day_orders = db.session.query(Order).filter(Order.date == start_date)
+        for order in day_orders:
             profit += order.profit
         profits.append(profit)
         start_date += delta

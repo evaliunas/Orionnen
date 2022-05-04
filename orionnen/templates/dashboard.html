@@ -1,3 +1,8 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <title>Orionnen - Dashboard</title>
+</head>
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -50,18 +55,18 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="{{ url_for('home') }}">All months</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='01') }}">January</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='02') }}">February</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='03') }}">March</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='04') }}">April</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='05') }}">May</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='06') }}">June</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='07') }}">July</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='08') }}">August</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='09') }}">September</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='10') }}">October</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='11') }}">November</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('show_dashboard', month='12') }}">December</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='01') }}">January</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='02') }}">February</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='03') }}">March</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='04') }}">April</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='05') }}">May</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='06') }}">June</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='07') }}">July</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='08') }}">August</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='09') }}">September</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='10') }}">October</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='11') }}">November</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('filter_dashboard', month='12') }}">December</a></li>
         </ul>
     </div>
 
@@ -78,7 +83,7 @@
                                 label: "Profit",
                                 data: {{ profits | safe }},
                                 fill: false,
-                                borderColor: "#43739d",
+                                borderColor: "#846cc2",
                                 lineTension: 0.2
                             }
                         ]
@@ -90,120 +95,138 @@
             </script>
     {% endif %}
     <br><br>
-    <div class="row">
-        <div class="col">
-            <h2 style="text-align:center">Orders: {{ data[0] }} (of which fully refunded: {{ data[1] }})</h2>
-        </div>
-    </div>
-    <div class="content-section" style="vertical-align:middle">
+
+    <legend class="border-bottom mb-4" style="text-align:center"><h3>Orders: {{ data[0] }} (of which fully refunded: {{ data[1] }})</h3></legend><br>
+
+    <div container style="max-width: 100%;">
         <div class="row">
             <div class="col">
-                <h3 style="text-align:center">Total</h3>
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><h3 style="text-align:center">Total</h3></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Net revenue:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[2] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[4] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Etsy costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[6] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Production costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[8] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Shipping costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[10] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Undefined costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[12] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Profit:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[14] }} €</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col">
-                <h3 style="text-align:center">Per order (fully refunded orders excluded)</h3>
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><h3 style="text-align:center">Per order (refunded excluded)</h3></div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Net revenue:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[3] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[5] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Etsy costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[7] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Production costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[9] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Shipping costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[11] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Undefined costs:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[13] }} €</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 style="text-align:right">Profit:</h4>
+                            </div>
+                            <div class="col">
+                                <h4 style="text-align:left">{{ data[15] }} €</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Net revenue:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[2] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Net revenue:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[3] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[4] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[5] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Etsy costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[6] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Etsy costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[7] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Production costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[8] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Production costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[9] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Shipping costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[10] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Shipping costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[11] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Undefined costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[12] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Undefined costs:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[13] }} €</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 style="text-align:right">Profit:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[14] }} €</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:right">Profit:</h3>
-        </div>
-        <div class="col">
-            <h3 style="text-align:left">{{ data[15] }} €</h3>
-        </div>
-    </div><br>
 
 {% endblock %}
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>

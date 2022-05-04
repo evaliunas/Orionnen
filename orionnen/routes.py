@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for, redirect, flash, redirect
+from flask import render_template, request, url_for, flash, redirect
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
 from orionnen.upload_file import upload_data, update_data
@@ -13,6 +13,20 @@ def home():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     return render_template('index.html', title='Home')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Your account successfully created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,20 +47,6 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash(f'Your account successfully created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('register.html', title='Register', form=form)
 
 def send_reset_email(user):
     token = user.get_reset_token()
@@ -86,7 +86,6 @@ def reset_token(token):
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 
-
 @app.route('/account')
 @login_required
 def account():
@@ -109,7 +108,7 @@ def dashboard():
 
 @app.route('/dashboard/month=<month>', methods=['GET', 'POST'])
 @login_required
-def show_dashboard(month):
+def filter_dashboard(month):
     try:
         data = calculate(month)
         dataset = linechart(month)
@@ -139,29 +138,29 @@ def upload():
 @app.route('/orders', methods=['GET', 'POST'])
 @login_required
 def show_orders():
-    orders = db.session.query(Order).order_by(Order.date.desc())
+    orders = db.session.query(Order).filter_by(author=current_user).order_by(Order.date.desc())
     month = 'all'
     return render_template("orders.html", orders=orders, month=month)
 
 @app.route('/orders/month_<month>', methods=['GET', 'POST'])
 @login_required
 def show_filtered_orders(month):
-    orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).order_by(Order.date.desc())
+    orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).filter_by(author=current_user).order_by(Order.date.desc())
     return render_template("orders.html", orders=orders, month=month)
 
 @app.route('/orders/month_<month>/status=<status>', methods=['GET', 'POST'])
 @login_required
 def show_orders_status(status, month):
     if month != 'all':
-        orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31'), Order.status == status).order_by(Order.date.desc())
+        orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31'), Order.status == status).filter_by(author=current_user).order_by(Order.date.desc())
     else:
-        orders = db.session.query(Order).filter(Order.status == status).order_by(Order.date.desc())
+        orders = db.session.query(Order).filter(Order.status == status).filter_by(author=current_user).order_by(Order.date.desc())
     return render_template("orders.html", orders=orders)
 
 @app.route('/orders/id_<order_id>', methods=['GET', 'POST'])
 @login_required
 def view_order(order_id):
-    order = Order.query.filter_by(order_id=order_id).first()
+    order = Order.query.filter_by(order_id=order_id).filter_by(author=current_user).first()
     if request.method == "POST":
         note = request.form['note']
         order.note = note
@@ -173,7 +172,7 @@ def view_order(order_id):
 @app.route('/orders/id_<order_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_order(order_id):
-    order = Order.query.filter_by(order_id=order_id).first()
+    order = Order.query.filter_by(order_id=order_id).filter_by(author=current_user).first()
     form = EditOrderForm()
     if form.validate_on_submit():
         if form.buyer.data:
@@ -197,9 +196,8 @@ def edit_order(order_id):
 @app.route('/orders/id_<order_id>/status=<status>', methods=['GET', 'POST'])
 @login_required
 def change_status(order_id, status):
-    order = Order.query.filter_by(order_id=order_id).first()
+    order = Order.query.filter_by(order_id=order_id).filter_by(author=current_user).first()
     order.status = status
     db.session.commit()
-    upload_file.update_data()
     flash('Order updated!', 'success')
-    return redirect(url_for('view_order', order=order))
+    return redirect(url_for('view_order', order_id=order_id))

@@ -19,7 +19,7 @@
                     {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
-                </div>
+                </div><br>
                 <div class="form-group">
                     {{ form.password.label(class="form-control-label") }}
                     {% if form.password.errors %}
@@ -32,23 +32,23 @@
                     {% else %}
                         {{ form.password(class="form-control form-control-lg") }}
                     {% endif %}
-                </div>
+                </div><br>
                 <div class="form-check">
                     {{ form.remember(class="form-check-input") }}
                     {{ form.remember.label(class="form-check-label") }}
                 </div>
             </fieldset>
             <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.submit(class="btn btn-outline-dark") }}
             </div>
             <small class="text-muted ml-2">
                 <a href="{{ url_for('reset_request') }}">Forgot password?</a>
             </small>
         </form>
-    </div>
+    </div><br>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Don't have an account?<a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
+            Don't have an account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
         </small>
     </div>
 
