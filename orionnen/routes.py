@@ -1,11 +1,12 @@
+from datetime import datetime
 from flask import render_template, request, url_for, flash, redirect
 from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
 from orionnen.upload_file import upload_data, update_data
 from orionnen import app, db, bcrypt, mail
 from orionnen.dashboard import calculate, linechart
-from orionnen.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, EditOrderForm
-from orionnen.models import Order, User
+from orionnen.forms import RegistrationForm, LoginForm, RequestResetForm, ResetPasswordForm, EditOrderForm, NewOrderForm, InputCostsForm
+from orionnen.models import Order, User, Costs
 from flask_mail import Message
 
 @app.route('/')
@@ -135,27 +136,59 @@ def upload():
             return redirect(url_for('upload'))
     return render_template("upload.html")
 
+@app.route('/new_order', methods=['GET', 'POST'])
+@login_required
+def new_order():
+    form = NewOrderForm()
+    if form.validate_on_submit():
+        order = Order(author=current_user, order_id=form.order_id.data, date=form.date.data)
+        db.session.add(order)
+        db.session.commit()
+        if form.buyer.data:
+            order.buyer = form.buyer.data
+        if form.sku.data:
+            order.sku = form.sku.data
+        if form.revenue.data:
+            order.revenue = form.revenue.data
+        if form.note.data:
+            order.note = form.note.data
+        db.session.commit()
+        flash('Order added!', 'success')
+    return render_template("new_order.html", title='New Order', form=form)
+
 @app.route('/orders', methods=['GET', 'POST'])
 @login_required
 def show_orders():
     orders = db.session.query(Order).filter_by(author=current_user).order_by(Order.date.desc())
-    month = 'all'
-    return render_template("orders.html", orders=orders, month=month)
+    return render_template("orders.html", orders=orders, month='All', status='All')
 
-@app.route('/orders/month_<month>', methods=['GET', 'POST'])
+@app.route('/orders/<month>/<status>', methods=['GET', 'POST'])
 @login_required
-def show_filtered_orders(month):
-    orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).filter_by(author=current_user).order_by(Order.date.desc())
-    return render_template("orders.html", orders=orders, month=month)
-
-@app.route('/orders/month_<month>/status=<status>', methods=['GET', 'POST'])
-@login_required
-def show_orders_status(status, month):
-    if month != 'all':
-        orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31'), Order.status == status).filter_by(author=current_user).order_by(Order.date.desc())
+def show_orders_filtered(status, month):
+    if month == 'All':
+        if status == 'Not delivered':
+            orders = db.session.query(Order).filter(Order.status != 'Delivered', Order.status != 'Waiting for return',
+                                                    Order.status != 'Canceled').filter_by(author=current_user).order_by(
+                                                    Order.date.desc())
+        elif status != 'All':
+            orders = db.session.query(Order).filter(Order.status == status).filter_by(author=current_user).order_by(
+                                                    Order.date.desc())
+        else:
+            orders = db.session.query(Order).filter_by(author=current_user).order_by(Order.date.desc())
     else:
-        orders = db.session.query(Order).filter(Order.status == status).filter_by(author=current_user).order_by(Order.date.desc())
-    return render_template("orders.html", orders=orders)
+        if status == 'Not delivered':
+            orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31'),
+                                                    Order.status != 'Delivered', Order.status != 'Waiting for return',
+                                                    Order.status != 'Canceled').filter_by(author=current_user).order_by(
+                                                    Order.date.desc())
+        elif status != 'All':
+            orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31'),
+                                                    Order.status == status).filter_by(author=current_user).order_by(
+                                                    Order.date.desc())
+        else:
+            orders = db.session.query(Order).filter(Order.date.between(f'2022-{month}-01', f'2022-{month}-31')).filter_by(
+                                                    author=current_user).order_by(Order.date.desc())
+    return render_template("orders.html", orders=orders, month=month, status=status)
 
 @app.route('/orders/id_<order_id>', methods=['GET', 'POST'])
 @login_required
@@ -179,11 +212,11 @@ def edit_order(order_id):
             order.buyer = form.buyer.data
         if form.sku.data:
             order.sku = form.sku.data
-        if form.prod_costs.data:
+        if form.prod_costs.data != None:
             order.prod_costs = form.prod_costs.data
-        if form.ship_costs.data:
+        if form.ship_costs.data != None:
             order.ship_costs = form.ship_costs.data
-        if form.undef_costs.data:
+        if form.undef_costs.data != None:
             order.undef_costs = form.undef_costs.data
         if form.note.data:
             order.note = form.note.data
@@ -193,6 +226,15 @@ def edit_order(order_id):
         return redirect(url_for('view_order', order_id=order.order_id))
     return render_template("edit_order.html", order=order, form=form)
 
+@app.route('/orders/id_<order_id>/delete')
+@login_required
+def delete_order(order_id):
+    order = Order.query.filter_by(order_id=order_id).filter_by(author=current_user).first()
+    db.session.delete(order)
+    db.session.commit()
+    flash('Order deleted!', 'success')
+    return redirect(url_for("show_orders"))
+
 @app.route('/orders/id_<order_id>/status=<status>', methods=['GET', 'POST'])
 @login_required
 def change_status(order_id, status):
@@ -201,3 +243,82 @@ def change_status(order_id, status):
     db.session.commit()
     flash('Order updated!', 'success')
     return redirect(url_for('view_order', order_id=order_id))
+
+@app.route('/new_costs', methods=['GET', 'POST'])
+@login_required
+def new_costs():
+    form = InputCostsForm()
+    if form.validate_on_submit():
+        costs = Costs(author=current_user, order_id=form.order_id.data, date=form.date.data, value=form.value.data)
+        db.session.add(costs)
+        db.session.commit()
+        if form.order_id.data:
+            costs.order_id = form.order_id.data
+            order = Order.query.filter_by(order_id=form.order_id.data).filter_by(author=current_user).first()
+            if not order:
+                flash('No order with provided order ID', 'danger')
+                db.session.delete(costs)
+                db.session.commit()
+                return redirect(url_for('new_costs', title='New Costs', form=form))
+            else:
+                if form.costs_name.data:
+                    costs.costs_name = form.costs_name.data
+                if form.note.data:
+                    costs.note = form.note.data
+                if form.type.data == 'Production costs':
+                    costs.prod_costs = True
+                else:
+                    costs.prod_costs = False
+                if form.type.data == 'Shipping costs':
+                    costs.ship_costs = True
+                else:
+                    costs.ship_costs = False
+                if form.type.data == 'Other costs':
+                    costs.undef_costs = True
+                else:
+                    costs.undef_costs = False
+                db.session.commit()
+                update_data()
+                flash('Costs added!', 'success')
+    return render_template("new_costs.html", title='New Costs', form=form)
+
+@app.route('/costs/id_<id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_costs(id):
+    costs = Costs.query.filter_by(id=id).filter_by(author=current_user).first()
+    form = EditCostsForm()
+    if form.validate_on_submit():
+        if form.date.data:
+            costs.date = form.date.data
+        if form.value.data:
+            costs.value = form.value.data
+        if form.costs_name.data:
+            costs.costs_name = form.costs_name.data
+        if form.note.data:
+            costs.note = form.note.data
+        if form.type.data == 'Production costs':
+            costs.prod_costs = True
+        else:
+            costs.prod_costs = False
+        if form.type.data == 'Shipping costs':
+            costs.ship_costs = True
+        else:
+            costs.ship_costs = False
+        if form.type.data == 'Other costs':
+            costs.undef_costs = True
+        else:
+            costs.undef_costs = False
+        db.session.commit()
+        update_data()
+        flash('Costs updated!', 'success')
+        return redirect(url_for('view_costs', id=id))
+    return render_template("edit_costs.html", costs=costs, form=form)
+
+@app.route('/costs/<id>/delete')
+@login_required
+def delete_costs(id):
+    costs = Costs.query.filter_by(id=id).filter_by(author=current_user).first()
+    db.session.delete(costs)
+    db.session.commit()
+    flash('Costs deleted!', 'success')
+    return redirect(url_for("orders"))

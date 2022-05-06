@@ -59,6 +59,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     orders = db.relationship('Order', backref='author', lazy=True)
+    costs = db.relationship('Costs', backref='author', lazy=True)
 
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
@@ -72,5 +73,16 @@ class User(db.Model, UserMixin):
         except:
             return None
         return User.query.get(user_id)
+
+class Costs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    order_id = db.Column(db.Integer)
+    date = db.Column(db.Date, nullable=False)
+    value = db.Column(db.Float, nullable=False)
+    costs_name = db.Column(db.String(40), default='Not Specified')
+    prod_costs = db.Column(db.Boolean)
+    ship_costs = db.Column(db.Boolean)
+    undef_costs = db.Column(db.Boolean)
 
 db.create_all()

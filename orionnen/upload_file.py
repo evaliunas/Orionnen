@@ -1,6 +1,6 @@
 from datetime import datetime
 from orionnen import db
-from orionnen.models import Order
+from orionnen.models import Order, Costs
 from decimal import Decimal as D
 from flask_login import current_user
 
@@ -135,6 +135,24 @@ def update_data():
         order.etsy_costs = D(str(order.net_proc_fee)) + D(str(order.net_ad_fee)) \
                         + D(str(order.net_tax)) + D(str(order.net_vat)) \
                         + D(str(order.net_trans_fee))
+        prod_costs_list = db.session.query(Costs).filter(Costs.order_id == order.order_id,
+                                                         Costs.prod_costs == True).filter_by(author=current_user)
+        prod_costs = 0
+        for pcosts in prod_costs_list:
+            prod_costs += pcosts.value
+        order.prod_costs = prod_costs
+        ship_costs_list = db.session.query(Costs).filter(Costs.order_id == order.order_id,
+                                                         Costs.ship_costs == True).filter_by(author=current_user)
+        ship_costs = 0
+        for scosts in ship_costs_list:
+            ship_costs += scosts.value
+        order.ship_costs = ship_costs
+        undef_costs_list = db.session.query(Costs).filter(Costs.order_id == order.order_id,
+                                                          Costs.undef_costs == True).filter_by(author=current_user)
+        undef_costs = 0
+        for ucosts in undef_costs_list:
+            undef_costs += ucosts.value
+        order.undef_costs = undef_costs
         order.other_costs = D(str(order.prod_costs)) + D(str(order.ship_costs)) + D(str(order.undef_costs))
         order.costs = D(str(order.etsy_costs)) + D(str(order.other_costs))
         order.profit = D(str(order.net_revenue)) - D(str(order.costs))

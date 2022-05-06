@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, IntegerField, DateField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
 from orionnen.models import User
+from datetime import date
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -47,4 +48,30 @@ class EditOrderForm(FlaskForm):
     ship_costs = FloatField('Shipping costs', validators=[Optional()])
     undef_costs = FloatField('Undefined costs', validators=[Optional()])
     note = StringField('Note')
+    submit = SubmitField('Submit')
+
+class NewOrderForm(FlaskForm):
+    order_id = IntegerField("Order ID", validators=[DataRequired()])
+    date = DateField("Date", default=date.today())
+    buyer = StringField("Buyer's name")
+    sku = StringField('SKU')
+    revenue = FloatField('Revenue', validators=[Optional()])
+    note = StringField('Note')
+    submit = SubmitField('Submit')
+
+class InputCostsForm(FlaskForm):
+    order_id = IntegerField("Order ID", validators=[Optional()])
+    date = DateField("Date", default=date.today())
+    value = FloatField("Value", validators=[DataRequired()])
+    costs_name = StringField("Costs name")
+    note = StringField('Note')
+    type = SelectField('Type', choices=['Production costs', 'Shipping costs', 'Other costs'], validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class EditCostsForm(FlaskForm):
+    date = DateField("Date", default=date.today())
+    value = FloatField("Value", validators=[DataRequired()])
+    costs_name = StringField("Costs name")
+    note = StringField('Note')
+    type = SelectField('Type', choices=['Production costs', 'Shipping costs', 'Other costs'], validators=[DataRequired()])
     submit = SubmitField('Submit')

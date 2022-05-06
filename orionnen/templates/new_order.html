@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">New Order</legend>
+                <div class="form-group">
+                    {{ form.order_id.label(class="form-control-label") }}
+                    {% if form.order_id.errors %}
+                        {{ form.order_id(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.order_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.order_id(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.date.label(class="form-control-label") }}
+                    {% if form.date.errors %}
+                        {{ form.date(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.date(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.buyer.label(class="form-control-label") }}
+                    {% if form.buyer.errors %}
+                        {{ form.buyer(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.buyer.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.buyer(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.sku.label(class="form-control-label") }}
+                    {% if form.sku.errors %}
+                        {{ form.sku(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sku.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.sku(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.revenue.label(class="form-control-label") }}
+                    {% if form.revenue.errors %}
+                        {{ form.revenue(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.revenue.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.revenue(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.note.label(class="form-control-label") }}
+                    {% if form.note.errors %}
+                        {{ form.note(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.note.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.note(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-dark") }}
+            </div>
+        </form>
+    </div><br>
+
+{% endblock %}

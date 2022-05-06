@@ -2,12 +2,11 @@
 
 {% block content %}
 
-    <div container>
-        <div class="row">
-          <h2>
-            Order #{{ order.order_id }} <a class="btn btn-outline-dark" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a>
-          </h2>
-        </div><br>
+        <div id="outer">
+            <div class="inner"><h2>Order #{{ order.order_id }}</h2></div>
+            <div class="inner"><a class="btn btn-outline-dark" href="{{ url_for('edit_order', order_id=order.order_id) }}">Edit</a></div>
+            <div class="inner"><a class="btn btn-outline-dark" data_toggle="modal" data_target="#updateModal" href="{{ url_for('delete_order', order_id=order.order_id) }}">Delete</a></div>
+        </div><br><br>
         <div class="row" style="text-align:center">
           <h4>Status: {{ order.status }}</h4>
         </div>
@@ -69,8 +68,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div><br><br>
+        </div><br><br>
 
     <div class="container" style="max-width: 100%;">
         <div class="row">

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>
+        {{ costs.type }} <a class="btn btn-outline-dark" href="{{ url_for('view_order', order_id=order.order_id) }}">Back</a>
+    </h1><br>
+    <legend class="border-bottom mb-4">Edit Costs</legend>
+
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.date.label(class="form-control-label") }}
+                    {% if form.date.errors %}
+                        {{ form.date(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.date(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.value.label(class="form-control-label") }}
+                    {% if form.value.errors %}
+                        {{ form.value(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.value.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.value(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.costs_type.label(class="form-control-label") }}
+                    {% if form.costs_type.errors %}
+                        {{ form.costs_type(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.costs_type.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.costs_type(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-group">
+                    {{ form.note.label(class="form-control-label") }}
+                    {% if form.note.errors %}
+                        {{ form.note(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.note.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.note(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div><br>
+                <div class="form-check">
+                    {{ form.prod_costs(class="form-check-input") }}
+                    {{ form.prod_costs.label(class="form-check-label") }}
+                </div>
+                <div class="form-check">
+                    {{ form.ship_costs(class="form-check-input") }}
+                    {{ form.ship_costs.label(class="form-check-label") }}
+                </div>
+                <div class="form-check">
+                    {{ form.undef_costs(class="form-check-input") }}
+                    {{ form.undef_costs.label(class="form-check-label") }}
+                </div><br>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-dark") }}
+            </div>
+        </form>
+    </div><br>
+
+{% endblock %}
